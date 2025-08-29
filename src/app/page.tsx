@@ -27,6 +27,7 @@ export default function Home() {
       <section>
         <h1 className="text-xl font-semibold mb-4">Step 1: Select Action Type & Provide Query</h1>
         <div className="flex flex-wrap gap-2 mb-4">
+          {/* Action Type Button */}
           {buttons.map((b) => (
             <button
               key={b.key}
@@ -39,6 +40,7 @@ export default function Home() {
             </button>
           ))}
         </div>
+        {/* Step1 TextArea */}
         <textarea
           className="w-full border p-2 mb-4"
           rows={4}
@@ -46,6 +48,7 @@ export default function Home() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+        {/* Step1 Continue Button */}
         <button
           className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
           disabled={!canProceed}
@@ -54,6 +57,8 @@ export default function Home() {
           Continue to Details
         </button>
       </section>
+
+      {/* Step2 */}
       {step === 2 && (
         <section className="space-y-4">
           <h2 className="text-xl font-semibold">Step 2: Provide Detailed Information</h2>
