@@ -32,5 +32,4 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
       - run: npm ci
-      # CI環境向けに冪等化（Jestなら --ci 推奨）
-      - run: npm test -- --ci
+      - run: npm test
