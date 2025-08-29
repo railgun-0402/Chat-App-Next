@@ -1,3 +1,5 @@
+'use client';
+
 import { useActionForm } from '@/features/action-form/hooks/useActionForm';
 import { ActionType } from '@/features/action-form/types';
 
