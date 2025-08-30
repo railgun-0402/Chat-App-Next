@@ -2,6 +2,7 @@
 
 import { useActionForm } from '@/features/action-form/hooks/useActionForm';
 import { ActionType } from '@/features/action-form/types';
+import { ActionTypeButton } from '@/features/action-form/components/ActionTypeButton';
 
 export default function Home() {
   const {
@@ -15,40 +16,53 @@ export default function Home() {
     goToStep2,
   } = useActionForm();
 
-  const buttons: { key: ActionType; label: string }[] = [
-    { key: 'issue', label: 'Issue' },
-    { key: 'tech', label: 'Tech' },
-    { key: 'both', label: 'Both' },
-    { key: 'none', label: 'None' },
+  const buttons: { key: ActionType; label: string; description: string }[] = [
+    {
+      key: 'issue',
+      label: 'Issue',
+      description: 'Want to discuss problems or challenges',
+    },
+    {
+      key: 'tech',
+      label: 'Tech',
+      description: 'Need technical questions or support',
+    },
+    {
+      key: 'both',
+      label: 'Both',
+      description: 'Want to discuss both problems and technology',
+    },
+    {
+      key: 'none',
+      label: 'None',
+      description: 'Does not fit into specific categories',
+    },
   ];
 
   return (
     <main className="max-w-xl mx-auto p-4 space-y-8">
       <section>
         <h1 className="text-xl font-semibold mb-4">Step 1: Select Action Type & Provide Query</h1>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {/* Action Type Button */}
+        <div className="grid grid-cols-2 gap-4 mb-6">
           {buttons.map((b) => (
-            <button
+            <ActionTypeButton
               key={b.key}
-              className={`px-4 py-2 border rounded ${
-                type === b.key ? 'bg-blue-500 text-white' : ''
-              }`}
-              onClick={() => setType(b.key)}
-            >
-              {b.label}
-            </button>
+              type={b.key}
+              label={b.label}
+              description={b.description}
+              selected={type === b.key}
+              onSelect={setType}
+            />
           ))}
         </div>
-        {/* Step1 TextArea */}
+        <h2 className="text-lg font-medium mb-2">Detailed Query</h2>
         <textarea
-          className="w-full border p-2 mb-4"
+          className="w-full border rounded-md p-2 mb-4"
           rows={4}
           placeholder={placeholder}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        {/* Step1 Continue Button */}
         <button
           className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
           disabled={!canProceed}
